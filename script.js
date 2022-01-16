@@ -1,105 +1,58 @@
-// Assignment code here
 
-var randompass = { 
-  lower: randomLower,
-  upper: randomUpper,
-  number: randomNumber,
-  
-};
-
-var randomLower =
-   String.fromCharCode(Math.floor(Math.random() *26)+ 97 );
-
-
-var randomUpper =
-  String.fromCharCode(Math.floor(Math.random() *26)+ 65 );
-
-var randomNumber =
-  String.fromCharCode(Math.floor(Math.random() *10)+ 48 );
-
-
-
-
-
-
+var upperChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var lowerchar = "abcdefghijklmnopqrstuvwxyz";
+var numberChar = "0123456789";
+var specialChar = "!@#$%^&*()_+-=[{]}\|;:'";
+var finalChar = "";
 
 
 
 function generatePassword() {
-  promptCharacter();
-};
+ var generatedPassword = "";
+ // Initial prompt for character count 
+  var promptChar = window.prompt("Please choose number of charcters. 8 - 128");
+  // If not a number entered 
+  if(isNaN(length)){
+    alert("Please choose a number");
+    return generatePassword()
+  }
+  // If number is lower than 8 or greater than 128
+  if(promptChar<8 || promptChar> 128){
+    alert("Please choose numbers between 8 - 128");
+    return generatePassword()
+  }
+  // Password options Prompts 
+  var hasUpper = window.confirm("Would you like upper case letters?");
+  var hasLower = window.confirm("Would you like lower case letters?");
+  var hasNumbers = window.confirm("Would you like numbers?");
+  var hasSpecial = window.confirm("Would you like special characters?");
+  // If all options were skipped 
+  if(!hasUpper&&!hasLower&&!hasNumbers&&!hasSpecial){
+    alert("Minimum of 1 character type must be chosen");
+    return generatePassword()
+  }
+  
+  if(hasUpper){
+    finalChar += upperChar
+  }
+  if(hasLower){
+    finalChar += lowerchar
+  }
 
+  if(hasNumbers) {
+    finalChar += numberChar
+  }
 
-
-// Prompts user to choose character length
-function promptCharacter() {
-var promptChar = window.prompt(" Please choose between 8 - 128 characters.");
-// Converts the value into number
-promptChar = parseInt(promptChar);
-// if proper values imputted then proceeds towards next parameters
-if (promptChar <= 128 && promptChar >= 8) {
-  characterLower(promptChar); 
+  if(hasSpecial) {
+    finalChar += specialChar
+  }
+// password gen 
+for (var i = 0; i < promptChar; i++) {
+  generatedPassword += finalChar.charAt(Math.floor(Math.random() * finalChar.length));
 }
-  // Checks to see if a numeric value was entered
-  else (isNaN(promptCharacter)); {
-    window.alert("Please enter a numeric value between 8-128.");
-    return generatePassword();
-  }
-  
-};
+return generatedPassword;
 
-// Function to choose owercase
-function characterLower(randomLower) {
-  
-  var charLow = window.confirm("Would you like LowerCase letters?");
-  if (charLow) {  
-    characterUpper(randomLower);   
-  } else {
-    window.alert("No lowercase selected");
-    characterUpper();
-  }  
-};
-
-// Function to choose ppercase
-function characterUpper(randomUpper) {
-  var charUpp = window.confirm("Would you like UpperCase letters?");
-  if (charUpp) {
-    characterNumber(randomUpper);
-  } else {
-    window.alert("No Uppercase selected");
-    characterNumber();
-  }
-  console.log(characterNumber);
-};
-
-// Function to choose numbers
-function characterNumber(randomNumber) {
-  var charNum = window.confirm("Would you like Numbers?");
-  if (charNum) {
-    characterSpecial(randomNumber);
-  } else {
-    window.alert("No Numbers selected");
-    characterSpecial();
-  }
-};
-
-// Function to choose special characters
-function characterSpecial(randomsymbol) {
-  var charSpec = window.confirm("Would you like Special Characters?");
-  if (charSpec) {
-    generatedPassword(randomsymbol);
-  } else {
-    window.alert("No Special Charcters selected");
-    generatedPassword();
-  }
-};
-
-
-
-
-
-
-
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
