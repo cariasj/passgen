@@ -1,6 +1,6 @@
 <h3>Description:<br> <h3>
 
-Password Generator written in JS. Will generate a random password within its set of given options (numeric values, upper and lower case letters, and special characters) 
+Password Generator written in JS. Will generate a random password within its set of given options (character length between 8-128, numeric values, upper and lower case letters, and special characters) 
 
  Website Link:
 [Password Generator](https://cariasj.github.io/passgen/)
